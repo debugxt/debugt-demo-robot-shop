@@ -22,33 +22,43 @@ Everything else stays in Docker.
    docker compose -f docker-compose.yaml -f docker-compose.debugt.yaml up -d mongodb redis rabbitmq mysql dispatch web
    ```
 
-2. Open this folder in VS Code. Its launch configurations (`.vscode/launch.json`) are the six
-   services; Debugt lists them under Services.
+2. Open this folder in VS Code. Debugt asks once whether to use the setup this repo ships in
+   `.debugt/` — choose **Use it**. The Robot Shop canvas appears with the services on it, each
+   one's kind, host and port set, and the three lines that send their calls to each other to the
+   local ports. Its launch configurations (`.vscode/launch.json`) are the services; Debugt lists
+   them under Services.
 
-3. In Debugt, put the six on a canvas. Each is an **API**; give each its host:
+3. Run all.
 
-   | Service | Host |
-   |---|---|
-   | catalogue | `http://localhost:8081` |
-   | user | `http://localhost:8082` |
-   | cart | `http://localhost:8083` |
-   | payment | `http://localhost:8084` |
-   | shipping | `http://localhost:8085` |
-   | ratings | `http://localhost:8086` |
+What the setup holds, should you want to set it up by hand, or change it:
 
-4. Draw three lines. The services call each other by their Docker names on port 8080, which is
-   written into their code; each line is the redirect that sends that call to the local port.
+| Service | Kind | Host |
+|---|---|---|
+| catalogue (Node) | API | `http://localhost:8081` |
+| user | API | `http://localhost:8082` |
+| cart | API | `http://localhost:8083` |
+| payment | API | `http://localhost:8084` |
+| shipping | API | `http://localhost:8085` |
+| ratings | API | `http://localhost:8086` |
+| catalogue (Go) | API | `http://localhost:8087` |
+| buy-a-robot | API | `http://localhost:8088` |
+| dispatch (Node, Go) | consumer, of RabbitMQ | — |
 
-   | Line | Redirect calls to | To |
-   |---|---|---|
-   | cart → catalogue | `http://catalogue:8080` | `http://localhost:8081` |
-   | payment → user | `http://user:8080` | `http://localhost:8082` |
-   | payment → cart | `http://cart:8080` | `http://localhost:8083` |
+The services call each other by their Docker names on port 8080, which is written into their
+code; each line is the redirect that sends that call to the local port:
 
-   `shipping` needs no line: where it finds the cart is an environment variable, set in its
-   launch configuration.
+| Line | Redirect calls to | To |
+|---|---|---|
+| cart → catalogue | `http://catalogue:8080` | `http://localhost:8081` |
+| payment → user | `http://user:8080` | `http://localhost:8082` |
+| payment → cart | `http://cart:8080` | `http://localhost:8083` |
 
-5. Run all.
+`shipping` needs no line: where it finds the cart is an environment variable, set in its
+launch configuration.
+
+The setup is in `.debugt/`: `debugt.json` for each service's settings, `canvases/` for the
+canvas. Kept in the repo from Debugt's Settings → Repo setup, a change made in Debugt is saved
+there, ready to commit.
 
 ## Use
 

@@ -1,5 +1,15 @@
 # Sample Microservice Application
 
+> **About this fork.** This is [instana/robot-shop](https://github.com/instana/robot-shop), set up as a demo and test bed for
+> [Debugt](https://debugt.com): run its services from VS Code and see each request's hops, the code it ran and the values it
+> changed. To run it that way, see [DEBUGT.md](DEBUGT.md). Everything else is the upstream project, under its Apache-2.0
+> licence ([LICENSE](LICENSE)).
+>
+> Added in this fork: `.debugt/` (the Debugt setup: a canvas and each service's settings), `.vscode/launch.json`, `DEBUGT.md`,
+> `buy-a-robot/`, `catalogue-go/`, `dispatch-node/`, `docker-compose.debugt.yaml`, `web/default.conf.debugt.template`,
+> `robot-shop.postman_collection.json`, Go modules for `dispatch`, and `ratings/html/composer.lock`.
+> Changed from upstream: `.gitignore`.
+
 Stan's Robot Shop is a sample microservice application you can use as a sandbox to test and learn containerised application orchestration and monitoring techniques. It is not intended to be a comprehensive reference example of how to write a microservices application, although you will better understand some of those concepts by playing with Stan's Robot Shop. To be clear, the error handling is patchy and there is not any security built into the application.
 
 You can get more detailed information from my [blog post](https://www.instana.com/blog/stans-robot-shop-sample-microservice-application/) about this sample microservice application.
