@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "name": "robot-shop",
+  "services": {
+    "buy-a-robot": {
+      "kind": "api",
+      "baseUrl": "http://localhost:8088"
+    },
+    "cart-node": {
+      "kind": "api",
+      "baseUrl": "http://localhost:8083"
+    },
+    "catalogue-go": {
+      "kind": "api",
+      "baseUrl": "http://localhost:8087",
+      "deepTrace": [
+        "go.mongodb.org/mongo-driver/mongo"
+      ]
+    },
+    "catalogue-node": {
+      "kind": "api",
+      "baseUrl": "http://localhost:8081"
+    },
+    "dispatch-go": {
+      "kind": "consumer",
+      "protocol": "amqp"
+    },
+    "dispatch-node": {
+      "kind": "consumer",
+      "ready": "Rabbit MQ ready true",
+      "protocol": "amqp",
+      "portless": true
+    },
+    "payment-python": {
+      "kind": "api",
+      "baseUrl": "http://localhost:8084"
+    },
+    "ratings-php": {
+      "kind": "api",
+      "baseUrl": "http://localhost:8086"
+    },
+    "shipping-java": {
+      "kind": "api",
+      "baseUrl": "http://localhost:8085"
+    },
+    "user-node": {
+      "kind": "api",
+      "baseUrl": "http://localhost:8082"
+    }
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "id": "canvas-cb1i0gpk",
+  "name": "Robot Shop",
+  "nodes": [
+    {
+      "projectName": "robot-shop",
+      "service": "payment-python",
+      "x": -81.40516295839504,
+      "y": 218.49388530259674
+    },
+    {
+      "projectName": "robot-shop",
+      "service": "user-node",
+      "x": 164.32215331923797,
+      "y": 142.34956544572233
+    },
+    {
+      "projectName": "robot-shop",
+      "service": "cart-node",
+      "x": 164.2333473079188,
+      "y": 218.9199357763292
+    },
+    {
+      "projectName": "robot-shop",
+      "service": "shipping-java",
+      "x": 166.11826727083917,
+      "y": 299.0561772210496
+    },
+    {
+      "projectName": "robot-shop",
+      "service": "ratings-php",
+      "x": -84.62157806079409,
+      "y": 142.24775873678942
+    },
+    {
+      "projectName": "robot-shop",
+      "service": "catalogue-go",
+      "x": 388.612138135503,
+      "y": 140.82682775402517
+    },
+    {
+      "projectName": "robot-shop",
+      "service": "buy-a-robot",
+      "x": -286.1961834926825,
+      "y": 215.6898883797934
+    },
+    {
+      "projectName": "robot-shop",
+      "service": "catalogue-node",
+      "x": 392.5677019795793,
+      "y": 219.58985532999273
+    },
+    {
+      "projectName": "robot-shop",
+      "service": "dispatch-node",
+      "x": 393.63595545139316,
+      "y": 300.1311756336255,
+      "disabled": true
+    },
+    {
+      "projectName": "robot-shop",
+      "service": "dispatch-go",
+      "x": 397.00889199508265,
+      "y": 366.8689277227007
+    }
+  ],
+  "wirings": [
+    {
+      "from": "robot-shop::cart-node",
+      "to": "robot-shop::catalogue-node",
+      "when": {
+        "method": "ANY",
+        "url": "http://catalogue:8080"
+      },
+      "redirect": {
+        "url": "http://localhost:8081"
+      }
+    },
+    {
+      "from": "robot-shop::payment-python",
+      "to": "robot-shop::user-node",
+      "when": {
+        "method": "ANY",
+        "url": "http://user:8080"
+      },
+      "redirect": {
+        "url": "http://localhost:8082"
+      }
+    },
+    {
+      "from": "robot-shop::payment-python",
+      "to": "robot-shop::cart-node",
+      "when": {
+        "method": "ANY",
+        "url": "http://cart:8080"
+      },
+      "redirect": {
+        "url": "http://localhost:8083"
+      }
+    }
+  ]
+}
