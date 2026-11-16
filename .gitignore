@@ -12,3 +12,6 @@ __pycache__/
 package-lock.json
 ratings/html/vendor/
 ratings/html/var/
+
+# Go debugger (Delve) builds, left behind when a debug session is stopped abruptly
+__debug_bin*
