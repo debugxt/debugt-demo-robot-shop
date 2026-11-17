@@ -5,21 +5,15 @@
 > changed. To run it that way, see [DEBUGT.md](DEBUGT.md). Everything else is the upstream project, under its Apache-2.0
 > licence ([LICENSE](LICENSE)).
 >
-> The services Debugt runs need four data stores, started in Docker:
+> **Try it:** [DEMO.md](DEMO.md) — what to install, one `docker compose` line, and one request in Debugt that buys a
+> robot and traces it through five services in four languages. Five is what Debugt's Free plan runs at once.
 >
-> ```bash
-> docker compose -f docker-compose.yaml -f docker-compose.debugt.yaml up -d mongodb redis rabbitmq mysql
-> ```
->
-> MongoDB on port 27018, Redis on 6379, RabbitMQ on 5672 (its console on http://localhost:15672, `guest` / `guest`) and MySQL on
-> 3306. Add `dispatch web` to the list for the Go `dispatch` and the storefront on http://localhost:8080. On an Apple Silicon
-> Mac, `mongodb` and `mysql` run as amd64 images under emulation — Docker marks them AMD64 — slower to start the first time,
-> and otherwise the same. Then open the folder in VS Code.
->
-> Added in this fork: `.debugt/` (the Debugt setup: a canvas and each service's settings), `.vscode/launch.json`, `DEBUGT.md`,
-> `buy-a-robot/`, `catalogue-go/`, `dispatch-node/`, `docker-compose.debugt.yaml`, `web/default.conf.debugt.template`,
+> Added in this fork: `.debugt/` (the Debugt setup: canvases and each service's settings), `.vscode/launch.json`, `DEMO.md`, `DEBUGT.md`,
+> `buy-a-robot/`, `catalogue-go/`, `dispatch-node/`, `docker-compose.debugt.yaml`, `docker-compose.debugt-five.yaml`,
+> `web/default.conf.debugt.template`, `web/default.conf.debugt-five.template`,
 > `robot-shop.postman_collection.json`, Go modules for `dispatch`, and `ratings/html/composer.lock`.
-> Changed from upstream: `.gitignore`.
+> Changed from upstream: `.gitignore`, and `payment/payment.py` — `USER_URL` and `CART_URL`, to find user and cart at a URL of
+> their own.
 
 Stan's Robot Shop is a sample microservice application you can use as a sandbox to test and learn containerised application orchestration and monitoring techniques. It is not intended to be a comprehensive reference example of how to write a microservices application, although you will better understand some of those concepts by playing with Stan's Robot Shop. To be clear, the error handling is patchy and there is not any security built into the application.
 

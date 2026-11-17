@@ -24,8 +24,8 @@ Everything else stays in Docker.
 
 2. Open this folder in VS Code. Debugt asks once whether to use the setup this repo ships in
    `.debugt/` — choose **Use it**. The Robot Shop canvas appears with the services on it, each
-   one's kind, host and port set, and the three lines that send their calls to each other to the
-   local ports. Its launch configurations (`.vscode/launch.json`) are the services; Debugt lists
+   one's kind, host and port set, and the line that sends cart's calls to catalogue to the local
+   port. Its launch configurations (`.vscode/launch.json`) are the services; Debugt lists
    them under Services.
 
 3. Run all.
@@ -44,21 +44,28 @@ What the setup holds, should you want to set it up by hand, or change it:
 | buy-a-robot | API | `http://localhost:8088` |
 | dispatch (Node, Go) | consumer, of RabbitMQ | — |
 
-The services call each other by their Docker names on port 8080, which is written into their
-code; each line is the redirect that sends that call to the local port:
+cart calls catalogue by its Docker name on port 8080, which is written into its code; the line is
+the redirect that sends that call to the local port:
 
 | Line | Redirect calls to | To |
 |---|---|---|
 | cart → catalogue | `http://catalogue:8080` | `http://localhost:8081` |
-| payment → user | `http://user:8080` | `http://localhost:8082` |
-| payment → cart | `http://cart:8080` | `http://localhost:8083` |
 
-`shipping` needs no line: where it finds the cart is an environment variable, set in its
-launch configuration.
+The others need no line: where `shipping` finds the cart, and where `payment` finds user and cart
+(`USER_URL`, `CART_URL`), are environment variables set in their launch configurations.
 
 The setup is in `.debugt/`: `debugt.json` for each service's settings, `canvases/` for the
 canvas. Kept in the repo from Debugt's Settings → Repo setup, a change made in Debugt is saved
 there, ready to commit.
+
+## On Debugt's Free plan: five services, the rest in Docker
+
+Free runs five services at once. The **Robot Shop · five services** canvas runs `buy-a-robot`,
+`catalogue` (Node), `payment` (Python), `shipping` (Java) and `catalogue-go` (Go) from VS Code,
+with `user`, `cart`, `ratings` and `dispatch` in Docker — published on 8082, 8083 and 8086, where
+the five find them — beside a `catalogue` for `cart` and `ratings`, the data stores and the
+storefront. [DEMO.md](DEMO.md) walks through it, from what to install to the one request that
+buys a robot.
 
 ## Use
 
@@ -125,13 +132,18 @@ It finds the services on this machine's ports (8081–8087), so it needs no line
 
 - First time only: `npm install` in `catalogue`, `user` and `cart`; and for `payment`,
   `python3 -m venv .venv && .venv/bin/pip install Flask requests pika prometheus_client opentracing instana`.
+- `catalogue-go` and `dispatch-go` need Go on this machine and VS Code's Go extension, `golang.go`,
+  which builds and debugs them with Delve. Their modules are fetched on the first run.
 - `shipping` needs a JDK (11 or 17) and VS Code's Java extensions, `redhat.java` and
   `vscjava.vscode-java-debug`. They build it from `shipping/pom.xml`; the first time, that means
   downloading its dependencies, and Run fails until it is done — watch the Java status in VS
   Code's status bar.
 - Each service logs that it cannot reach an Instana agent. There is none; it is harmless.
 - `payment` calls its "payment gateway" on every order — `https://paypal.com/` unless
-  `PAYMENT_GATEWAY` is set in its launch configuration.
+  `PAYMENT_GATEWAY` is set in its launch configuration — and fails the order unless it answers
+  200. PayPal refuses automated calls, so on both canvases a URL override on `payment`, **Payment
+  gateway**, answers for it. Switch it off in payment's details, under URL overrides, to see the
+  order fail on PayPal's 403.
 - To go back to the stock shop: `docker compose down`, then `docker compose up -d`.
 - `ratings` needs PHP with Xdebug on this machine, and VS Code's PHP Debug extension
   (`xdebug.php-debug`). Once:
