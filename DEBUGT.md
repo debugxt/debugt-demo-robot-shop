@@ -134,7 +134,7 @@ It finds the services on this machine's ports (8081–8087), so it needs no line
   — on Windows, `python -m venv .venv` then `.venv\Scripts\pip install …`, the same packages.
 - `catalogue-go` and `dispatch-go` need Go on this machine and VS Code's Go extension, `golang.go`,
   which builds and debugs them with Delve. Their modules are fetched on the first run.
-- `shipping` needs a JDK (11 or 17) and VS Code's Java extensions, `redhat.java` and
+- `shipping` needs a JDK (11, 17 or 21) and VS Code's Java extensions, `redhat.java` and
   `vscjava.vscode-java-debug`. They build it from `shipping/pom.xml`; the first time, that means
   downloading its dependencies, and Run fails until it is done — watch the Java status in VS
   Code's status bar.

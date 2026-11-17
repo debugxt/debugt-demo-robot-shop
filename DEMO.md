@@ -11,22 +11,58 @@ On your machine:
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 - Node 18 or later
 - Python 3
-- A JDK, 11 or 17
+- A JDK: 11, 17 or 21
 - Go 1.22 or later
 
 It runs on macOS, Linux and Windows. On Windows, Docker Desktop runs on WSL 2, and the commands
 below go in PowerShell.
 
-In VS Code, these extensions:
+Whatever is missing installs from the command line. On Windows:
+
+```powershell
+winget install Docker.DockerDesktop
+winget install OpenJS.NodeJS.LTS
+winget install Python.Python.3.12
+winget install EclipseAdoptium.Temurin.21.JDK
+winget install GoLang.Go
+```
+
+On macOS, with [Homebrew](https://brew.sh):
+
+```bash
+brew install --cask docker-desktop temurin@21
+brew install node python go
+```
+
+On Ubuntu (elsewhere, your distribution's packages, and
+[Docker Engine](https://docs.docker.com/engine/install/) with its Compose plugin):
+
+```bash
+sudo apt install python3-venv openjdk-17-jdk
+sudo snap install node --classic
+sudo snap install go --classic
+```
+
+Then VS Code's extensions, the same on every system:
+
+```bash
+code --install-extension debugt-labs.debugt-extension
+code --install-extension ms-python.python
+code --install-extension vscjava.vscode-java-pack
+code --install-extension golang.go
+code --install-extension ms-azuretools.vscode-docker
+```
 
 | Extension | For |
 |---|---|
 | [Debugt](https://marketplace.visualstudio.com/items?itemName=debugt-labs.debugt-extension) | Debugt itself |
-| Python Debugger (`ms-python.debugpy`) | `payment` |
-| Language Support for Java (`redhat.java`) and Debugger for Java (`vscjava.vscode-java-debug`) | `shipping` |
+| Python (`ms-python.python`), with its debugger | `payment` |
+| Extension Pack for Java (`vscjava.vscode-java-pack`): Java's language support and debugger | `shipping` |
 | Go (`golang.go`) | `catalogue-go` |
+| Docker (`ms-azuretools.vscode-docker`) — optional | the shop's containers, from VS Code |
 
-Node needs no extension: VS Code debugs it out of the box.
+Node needs no extension: VS Code debugs it out of the box. After installing, quit VS Code fully
+and open it again: it reads PATH only when it starts, and the JDK and Go are found on it.
 
 ## 2. Get the shop running
 
