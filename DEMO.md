@@ -58,6 +58,9 @@ The first `docker compose` pulls the images, which takes a few minutes. On an Ap
 
 ## 3. In Debugt
 
+If VS Code asks whether you trust the authors of the files in this folder, choose **Yes, I trust
+the authors**: Debugt does not run in Restricted Mode.
+
 1. Debugt asks whether to use the setup this repo ships. Choose **Use it**.
 2. In Debugt's header, pick the **Robot Shop · five services** canvas, and press **Run all**.
    The first run of `shipping` takes a minute or two while VS Code's Java extension builds it.
@@ -80,6 +83,7 @@ and its execution to see the code that ran.
 
 | What you see | Why |
 |---|---|
+| The project is not in Debugt | VS Code opened the folder in Restricted Mode, where Debugt does not run. Trust it: **Manage** (the gear) → **Trust**, or click **Restricted Mode** in the status bar. |
 | `fetch failed` on `localhost:8082`, `8083` or `8086` | `user`, `cart` or `ratings` is not up in Docker: run the `docker compose` line again. |
 | **Run all** is greyed out | Another canvas has services running. Stop them, or pick that canvas again. |
 | `shipping` fails to start | VS Code's Java extension is still building it: watch the Java status in the status bar, and run again. |
