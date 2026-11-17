@@ -1,0 +1,24 @@
+# Robot Shop with five services run from VS Code by Debugt — buy-a-robot, catalogue (Node),
+# payment (Python), shipping (Java) and catalogue-go (Go) — and the rest in Docker. Five is what
+# Debugt's Free plan runs at once. On top of the other two files:
+#
+#   docker compose -f docker-compose.yaml -f docker-compose.debugt.yaml -f docker-compose.debugt-five.yaml up -d \
+#     mongodb redis rabbitmq mysql catalogue user cart ratings dispatch web
+#
+# user, cart and ratings are published on 8082, 8083 and 8086, where payment, shipping and
+# buy-a-robot, on this machine, find them. catalogue runs in Docker as well, for cart and ratings;
+# the storefront's browsing goes to the one on this machine.
+services:
+  user:
+    ports:
+      - "8082:8080"
+  cart:
+    ports:
+      - "8083:8080"
+  ratings:
+    ports:
+      - "8086:80"
+  web:
+    volumes:
+      # The storefront's nginx config, its local services' locations pointed at this machine.
+      - ./web/default.conf.debugt-five.template:/etc/nginx/conf.d/default.conf.template:ro

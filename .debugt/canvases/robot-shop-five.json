@@ -1,0 +1,48 @@
+{
+  "id": "canvas-robot-five",
+  "name": "Robot Shop \u00b7 five services",
+  "nodes": [
+    {
+      "projectName": "robot-shop",
+      "service": "buy-a-robot",
+      "x": -272,
+      "y": 202
+    },
+    {
+      "projectName": "robot-shop",
+      "service": "payment-python",
+      "x": -58,
+      "y": 201,
+      "urlOverrides": [
+        {
+          "method": "GET",
+          "url": "https://paypal.com/",
+          "status": 200,
+          "bodyType": "json",
+          "body": "{\n  \"approved\": true\n}",
+          "name": "Payment gateway",
+          "description": "Answers for PayPal, which refuses automated calls"
+        }
+      ]
+    },
+    {
+      "projectName": "robot-shop",
+      "service": "shipping-java",
+      "x": 151,
+      "y": 202
+    },
+    {
+      "projectName": "robot-shop",
+      "service": "catalogue-go",
+      "x": -153,
+      "y": 113
+    },
+    {
+      "projectName": "robot-shop",
+      "service": "catalogue-node",
+      "x": 42,
+      "y": 113
+    }
+  ],
+  "wirings": []
+}
