@@ -50,6 +50,10 @@
       "program": "${workspaceFolder}/payment/payment.py",
       "cwd": "${workspaceFolder}/payment",
       "python": "${workspaceFolder}/payment/.venv/bin/python",
+      // A virtual environment on Windows keeps its interpreter in Scripts, not bin.
+      "windows": {
+        "python": "${workspaceFolder}/payment/.venv/Scripts/python.exe"
+      },
       "console": "internalConsole",
       "env": {
         "SHOP_PAYMENT_PORT": "8084",

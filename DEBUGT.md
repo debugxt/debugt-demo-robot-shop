@@ -129,8 +129,9 @@ It finds the services on this machine's ports (8081–8087), so it needs no line
 
 ## Notes
 
-- First time only: `npm install` in `catalogue`, `user` and `cart`; and for `payment`,
-  `python3 -m venv .venv && .venv/bin/pip install Flask requests pika prometheus_client opentracing instana`.
+- First time only: `npm install` in `catalogue`, `user` and `cart`; and for `payment`, in its
+  folder, `python3 -m venv .venv` then `.venv/bin/pip install Flask requests pika prometheus_client opentracing instana`
+  — on Windows, `python -m venv .venv` then `.venv\Scripts\pip install …`, the same packages.
 - `catalogue-go` and `dispatch-go` need Go on this machine and VS Code's Go extension, `golang.go`,
   which builds and debugs them with Delve. Their modules are fetched on the first run.
 - `shipping` needs a JDK (11 or 17) and VS Code's Java extensions, `redhat.java` and

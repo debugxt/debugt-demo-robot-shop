@@ -1,0 +1,2 @@
+# Mounted into the storefront's Linux container as they are: LF, whatever the checkout.
+web/*.template text eol=lf

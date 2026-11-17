@@ -14,6 +14,9 @@ On your machine:
 - A JDK, 11 or 17
 - Go 1.22 or later
 
+It runs on macOS, Linux and Windows. On Windows, Docker Desktop runs on WSL 2, and the commands
+below go in PowerShell.
+
 In VS Code, these extensions:
 
 | Extension | For |
@@ -30,12 +33,25 @@ Node needs no extension: VS Code debugs it out of the box.
 ```bash
 git clone https://github.com/debugxt/debugt-demo-robot-shop.git
 cd debugt-demo-robot-shop
-docker compose -f docker-compose.yaml -f docker-compose.debugt.yaml -f docker-compose.debugt-five.yaml up -d \
-  mongodb redis rabbitmq mysql catalogue user cart ratings dispatch web
-(cd catalogue && npm install)
-(cd payment && python3 -m venv .venv && .venv/bin/pip install Flask requests pika prometheus_client opentracing instana)
-code .
+docker compose -f docker-compose.yaml -f docker-compose.debugt.yaml -f docker-compose.debugt-five.yaml up -d mongodb redis rabbitmq mysql catalogue user cart ratings dispatch web
+npm install --prefix catalogue
 ```
+
+Then `payment`'s Python environment. On macOS and Linux:
+
+```bash
+python3 -m venv payment/.venv
+payment/.venv/bin/pip install Flask requests pika prometheus_client opentracing instana
+```
+
+On Windows:
+
+```powershell
+python -m venv payment\.venv
+payment\.venv\Scripts\pip install Flask requests pika prometheus_client opentracing instana
+```
+
+And open it in VS Code: `code .`
 
 The first `docker compose` pulls the images, which takes a few minutes. On an Apple Silicon Mac,
 `mongodb` and `mysql` run as amd64 images under emulation: slower to start, otherwise the same.
@@ -67,6 +83,6 @@ and its execution to see the code that ran.
 | `fetch failed` on `localhost:8082`, `8083` or `8086` | `user`, `cart` or `ratings` is not up in Docker: run the `docker compose` line again. |
 | **Run all** is greyed out | Another canvas has services running. Stop them, or pick that canvas again. |
 | `shipping` fails to start | VS Code's Java extension is still building it: watch the Java status in the status bar, and run again. |
-| `payment` fails to start | The Python environment is missing: run the `payment` line of step 2 again. |
+| `payment` fails to start | The Python environment is missing: run step 2's two Python lines again, for your system. |
 
 Every service from VS Code, and how this setup is made: [DEBUGT.md](DEBUGT.md).
