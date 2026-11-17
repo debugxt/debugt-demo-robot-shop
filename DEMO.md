@@ -70,7 +70,7 @@ and open it again: it reads PATH only when it starts, and the JDK and Go are fou
 git clone https://github.com/debugxt/debugt-demo-robot-shop.git
 cd debugt-demo-robot-shop
 docker compose -f docker-compose.yaml -f docker-compose.debugt.yaml -f docker-compose.debugt-five.yaml up -d mongodb redis rabbitmq mysql catalogue user cart ratings dispatch web
-npm install --prefix catalogue
+cd catalogue; npm install; cd ..
 ```
 
 Then `payment`'s Python environment. On macOS and Linux:
