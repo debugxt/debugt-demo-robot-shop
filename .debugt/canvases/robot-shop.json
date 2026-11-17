@@ -6,7 +6,18 @@
       "projectName": "robot-shop",
       "service": "payment-python",
       "x": -81.40516295839504,
-      "y": 218.49388530259674
+      "y": 218.49388530259674,
+      "urlOverrides": [
+        {
+          "method": "GET",
+          "url": "https://paypal.com/",
+          "status": 200,
+          "bodyType": "json",
+          "body": "{\n  \"approved\": true\n}",
+          "name": "Payment gateway",
+          "description": "Answers for PayPal, which refuses automated calls"
+        }
+      ]
     },
     {
       "projectName": "robot-shop",
@@ -74,28 +85,6 @@
       },
       "redirect": {
         "url": "http://localhost:8081"
-      }
-    },
-    {
-      "from": "robot-shop::payment-python",
-      "to": "robot-shop::user-node",
-      "when": {
-        "method": "ANY",
-        "url": "http://user:8080"
-      },
-      "redirect": {
-        "url": "http://localhost:8082"
-      }
-    },
-    {
-      "from": "robot-shop::payment-python",
-      "to": "robot-shop::cart-node",
-      "when": {
-        "method": "ANY",
-        "url": "http://cart:8080"
-      },
-      "redirect": {
-        "url": "http://localhost:8083"
       }
     }
   ]

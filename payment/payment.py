@@ -23,6 +23,10 @@ app.logger.setLevel(logging.INFO)
 
 CART = os.getenv('CART_HOST', 'cart')
 USER = os.getenv('USER_HOST', 'user')
+# This fork: where user and cart answer, as whole URLs, for when they are not on port 8080 of a
+# host of their own — as when Debugt runs payment on this machine and they run in Docker.
+CART_URL = os.getenv('CART_URL', 'http://{}:8080'.format(CART))
+USER_URL = os.getenv('USER_URL', 'http://{}:8080'.format(USER))
 PAYMENT_GATEWAY = os.getenv('PAYMENT_GATEWAY', 'https://paypal.com/')
 
 # Prometheus
@@ -61,7 +65,7 @@ def pay(id):
 
     # check user exists
     try:
-        req = requests.get('http://{user}:8080/check/{id}'.format(user=USER, id=id))
+        req = requests.get('{user}/check/{id}'.format(user=USER_URL, id=id))
     except requests.exceptions.RequestException as err:
         app.logger.error(err)
         return str(err), 500
@@ -103,7 +107,7 @@ def pay(id):
     # add to order history
     if not anonymous_user:
         try:
-            req = requests.post('http://{user}:8080/order/{id}'.format(user=USER, id=id),
+            req = requests.post('{user}/order/{id}'.format(user=USER_URL, id=id),
                     data=json.dumps({'orderid': orderid, 'cart': cart}),
                     headers={'Content-Type': 'application/json'})
             app.logger.info('order history returned {}'.format(req.status_code))
@@ -113,7 +117,7 @@ def pay(id):
 
     # delete cart
     try:
-        req = requests.delete('http://{cart}:8080/cart/{id}'.format(cart=CART, id=id));
+        req = requests.delete('{cart}/cart/{id}'.format(cart=CART_URL, id=id));
         app.logger.info('cart delete returned {}'.format(req.status_code))
     except requests.exceptions.RequestException as err:
         app.logger.error(err)

@@ -53,7 +53,10 @@
       "console": "internalConsole",
       "env": {
         "SHOP_PAYMENT_PORT": "8084",
-        "AMQP_HOST": "localhost"
+        "AMQP_HOST": "localhost",
+        // Where user and cart answer: run from VS Code, or in Docker with docker-compose.debugt-five.yaml.
+        "USER_URL": "http://localhost:8082",
+        "CART_URL": "http://localhost:8083"
       }
     },
     {
