@@ -28,8 +28,8 @@ Node needs no extension: VS Code debugs it out of the box.
 ## 2. Get the shop running
 
 ```bash
-git clone https://github.com/edgracilla/robot-shop.git
-cd robot-shop
+git clone https://github.com/debugxt/debugt-demo-robot-shop.git
+cd debugt-demo-robot-shop
 docker compose -f docker-compose.yaml -f docker-compose.debugt.yaml -f docker-compose.debugt-five.yaml up -d \
   mongodb redis rabbitmq mysql catalogue user cart ratings dispatch web
 (cd catalogue && npm install)
