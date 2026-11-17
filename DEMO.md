@@ -126,5 +126,6 @@ and its execution to see the code that ran.
 | **Run all** is greyed out | Another canvas has services running. Stop them, or pick that canvas again. |
 | `shipping` fails to start | VS Code's Java extension is still building it: watch the Java status in the status bar, and run again. |
 | `payment` fails to start | The Python environment is missing: run step 2's two Python lines again, for your system. |
+| `payment` fails with `DLL load failed while importing _ssl` | Its environment was made with Anaconda's Python, which finds its SSL libraries only from an Anaconda Prompt. Delete `payment\.venv` and make it again with Python from python.org: `py -3 -m venv payment\.venv`, then step 2's `pip install` line. |
 
 Every service from VS Code, and how this setup is made: [DEBUGT.md](DEBUGT.md).
