@@ -1,0 +1,13 @@
+{
+  "v": 1,
+  "kind": "http",
+  "name": "buy robot",
+  "method": "POST",
+  "path": "/buy",
+  "headers": [],
+  "body": {
+    "mode": "json",
+    "text": "{\n  \"foo\": \"bar\"\n}"
+  },
+  "id": "req_eVexSnvxQSvtREO_goKs"
+}
