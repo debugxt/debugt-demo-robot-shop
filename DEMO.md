@@ -15,7 +15,7 @@ On your machine:
 - Go 1.22 or later
 
 It runs on macOS, Linux and Windows. On Windows, Docker Desktop runs on WSL 2, and the commands
-below go in PowerShell.
+below go in PowerShell or Command Prompt.
 
 Whatever is missing installs from the command line. On Windows:
 
@@ -70,7 +70,9 @@ and open it again: it reads PATH only when it starts, and the JDK and Go are fou
 git clone https://github.com/debugxt/debugt-demo-robot-shop.git
 cd debugt-demo-robot-shop
 docker compose -f docker-compose.yaml -f docker-compose.debugt.yaml -f docker-compose.debugt-five.yaml up -d mongodb redis rabbitmq mysql catalogue user cart ratings dispatch web
-cd catalogue; npm install; cd ..
+cd catalogue
+npm install
+cd ..
 ```
 
 Then `payment`'s Python environment. On macOS and Linux:
