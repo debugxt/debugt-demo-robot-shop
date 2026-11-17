@@ -23,14 +23,13 @@ Everything else stays in Docker.
    ```
 
 2. Open this folder in VS Code. Debugt asks once whether to use the setup this repo ships in
-   `.debugt/` — choose **Use it**. The Robot Shop canvas appears with the services on it, each
-   one's kind, host and port set, and the line that sends cart's calls to catalogue to the local
-   port. Its launch configurations (`.vscode/launch.json`) are the services; Debugt lists
-   them under Services.
+   `.debugt/` — choose **Use it**: each service's kind, host and port are set. Its launch
+   configurations (`.vscode/launch.json`) are the services; Debugt lists them under Services.
+   Put the ones you want on a canvas, and draw the line from cart to catalogue (below).
 
 3. Run all.
 
-What the setup holds, should you want to set it up by hand, or change it:
+What the setup holds, should you want to change it:
 
 | Service | Kind | Host |
 |---|---|---|
@@ -55,7 +54,7 @@ The others need no line: where `shipping` finds the cart, and where `payment` fi
 (`USER_URL`, `CART_URL`), are environment variables set in their launch configurations.
 
 The setup is in `.debugt/`: `debugt.json` for each service's settings, `canvases/` for the
-canvas. Kept in the repo from Debugt's Settings → Repo setup, a change made in Debugt is saved
+five-service canvas of [DEMO.md](DEMO.md). Kept in the repo from Debugt's Settings → Repo setup, a change made in Debugt is saved
 there, ready to commit.
 
 ## On Debugt's Free plan: five services, the rest in Docker

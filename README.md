@@ -8,7 +8,7 @@
 > **Try it:** [DEMO.md](DEMO.md) — what to install, one `docker compose` line, and one request in Debugt that buys a
 > robot and traces it through five services in four languages. Five is what Debugt's Free plan runs at once.
 >
-> Added in this fork: `.debugt/` (the Debugt setup: canvases and each service's settings), `.vscode/launch.json`, `DEMO.md`, `DEBUGT.md`,
+> Added in this fork: `.debugt/` (the Debugt setup: the five-service canvas and each service's settings), `.vscode/launch.json`, `DEMO.md`, `DEBUGT.md`,
 > `buy-a-robot/`, `catalogue-go/`, `dispatch-node/`, `docker-compose.debugt.yaml`, `docker-compose.debugt-five.yaml`,
 > `web/default.conf.debugt.template`, `web/default.conf.debugt-five.template`,
 > `robot-shop.postman_collection.json`, Go modules for `dispatch`, and `ratings/html/composer.lock`.
